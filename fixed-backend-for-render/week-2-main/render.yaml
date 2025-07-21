@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: feedbackpro-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+    startCommand: node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GOOGLE_SERVICE_ACCOUNT_KEY
+        sync: false
+      - key: GOOGLE_SHEET_ID
+        sync: false
